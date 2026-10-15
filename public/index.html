@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080d20" />
+  <meta name="description" content="JobPilot AI matches your skills and preferred location to relevant career opportunities." />
+  <title>JobPilot AI — Find your next opportunity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="JobPilot AI home">
+        <span class="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 29c1-10 11-21 26-23l-4 13-10 10-12 0Z" fill="currentColor"/><path d="M8 29 4 39l12-5 4-5" fill="#7b72ff"/><circle cx="29" cy="15" r="4" fill="#071126"/><path d="M19 31 29 21l8-1-7 11-11 7Z" fill="#27d7ee"/></svg></span>
+        <span><strong>JobPilot <em>AI</em></strong><small>Your skills. Our AI. Your next job.</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="home"><span>⌂</span> Home</button>
+        <button class="nav-link" data-view="jobs"><span>⌕</span> Find jobs</button>
+        <button class="nav-link" data-view="profile"><span>♙</span> My profile</button>
+        <button class="nav-link" data-view="saved"><span>♡</span> Saved jobs <b class="saved-count" id="savedCount">0</b></button>
+        <button class="nav-link" data-view="learning"><span>▤</span> Learning path</button>
+      </nav>
+      <div class="sidebar-promo">
+        <div class="promo-orbit"><span>✦</span><div class="promo-rocket">➤</div></div>
+        <h3>Better skills.<br/>Bigger opportunities.</h3>
+        <p>Build the skills that move your career forward.</p>
+        <button class="text-button" data-view="learning">Explore learning path <span>↗</span></button>
+      </div>
+      <div class="sidebar-footer"><span class="status-dot"></span> Demo mode <span>•</span> v1.0</div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="Toggle menu">☰</button>
+        <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search jobs, skills, or locations..." aria-label="Search jobs, skills, or locations"/><kbd>/</kbd></label>
+        <div class="top-actions">
+          <button class="icon-button notification-button" id="noticeButton" aria-label="About JobPilot">♧<i></i></button>
+          <div class="avatar">JP</div>
+          <div class="user-meta"><strong>Career Explorer</strong><small>Student profile</small></div>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="page-view" id="view-home">
+          <div class="dashboard-grid">
+            <div class="primary-column">
+              <section class="hero panel">
+                <div class="hero-copy">
+                  <div class="eyebrow"><span class="sparkle">✦</span> YOUR NEXT CHAPTER STARTS HERE</div>
+                  <h1>Find your next<br/><span class="gradient-text">opportunity.</span></h1>
+                  <p>Tell us what you know and where you want to work. JobPilot finds roles that fit your skills and your next step.</p>
+                  <div class="hero-pills"><span><b>✳</b> Skill matching</span><span><b>⌖</b> Location aware</span><span><b>↗</b> Growth insights</span></div>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                  <div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
+                  <div class="bot"><div class="bot-antenna"></div><div class="bot-head"><i></i><i></i><span></span></div><div class="bot-body"><b>✦</b></div><div class="bot-arm left"></div><div class="bot-arm right"></div></div>
+                  <div class="floating-card"><span>↗</span><b>Career<br/>match</b></div><div class="art-star star-a">✦</div><div class="art-star star-b">✧</div>
+                </div>
+                <div class="hero-glow"></div>
+              </section>
+
+              <section class="panel search-panel" id="matcherPanel">
+                <div class="section-heading"><div class="heading-icon violet">⌘</div><div><h2>Build your match profile</h2><p>Start with your skills. We’ll handle the matching.</p></div><span class="step-label">STEP 01 / 01</span></div>
+                <form id="matchForm" novalidate>
+                  <div class="form-grid">
+                    <div class="field field-skills">
+                      <label for="skillsInput">Your skills <span class="required">*</span></label>
+                      <div class="skill-input-wrap"><input id="skillsInput" autocomplete="off" placeholder="e.g. JavaScript, React, SQL" maxlength="500" aria-describedby="skillsHelp"/><button type="button" id="addSkillButton" class="add-skill" aria-label="Add skill">+</button></div>
+                      <div class="skill-chips" id="inputSkillChips"></div>
+                      <small id="skillsHelp">Type a skill and press Enter or comma.</small>
+                    </div>
+                    <div class="field">
+                      <label for="experienceInput">Experience level <span class="required">*</span></label>
+                      <select id="experienceInput"><option value="Fresher">Fresher / student</option><option value="0–2 years">0–2 years</option><option value="3–5 years">3–5 years</option><option value="5+ years">5+ years</option></select>
+                    </div>
+                    <div class="field">
+                      <label for="locationInput">Preferred location <span class="required">*</span></label>
+                      <div class="select-wrap"><span>⌖</span><input id="locationInput" list="locationOptions" maxlength="80" placeholder="e.g. Delhi, Remote" value="Delhi" required/><datalist id="locationOptions"><option value="Delhi"><option value="Noida"><option value="Bengaluru"><option value="Pune"><option value="Mumbai"><option value="Hyderabad"><option value="Remote"></datalist></div>
+                    </div>
+                    <div class="field">
+                      <label for="workModeInput">Work preference</label>
+                      <select id="workModeInput"><option value="Any">Any work mode</option><option value="Remote">Remote</option><option value="Hybrid">Hybrid</option><option value="On-site">On-site</option></select>
+                    </div>
+                  </div>
+                  <div class="form-bottom"><p class="privacy-note"><span>◈</span> Your profile stays in this demo app.</p><button class="primary-button" type="submit" id="matchButton"><span>⌕</span> Find my job matches <b>→</b></button></div>
+                  <p class="form-error" id="formError" role="alert" hidden></p>
+                </form>
+              </section>
+
+              <section class="jobs-section" id="recommendations">
+                <div class="section-heading jobs-heading"><div class="heading-icon cyan">▣</div><div><h2 id="jobsTitle">Recommended for you</h2><p id="jobsSubtitle">A starting point based on the demo job dataset</p></div><div class="sort-wrap"><label class="sr-only" for="sortSelect">Sort jobs</label><select id="sortSelect"><option value="match">Best match</option><option value="salary">Job title A–Z</option><option value="location">Location A–Z</option></select></div></div>
+                <div class="result-notice" id="resultNotice"><span class="notice-icon">✦</span><span>Enter your skills above to get a personalized match score.</span></div>
+                <div class="job-list" id="jobList" aria-live="polite"></div>
+                <button class="secondary-button load-more" id="loadMoreButton" hidden>Show more roles <span>↓</span></button>
+              </section>
+            </div>
+
+            <aside class="insights-column">
+              <section class="panel match-panel">
+                <div class="panel-title"><h2>Your profile match</h2><span class="live-label"><i></i> LIVE</span></div>
+                <div class="match-overview"><div class="donut" id="overallDonut" style="--progress:0deg"><div><strong id="overallScore">—</strong><small>Overall match</small></div></div><div class="match-legend"><div><i class="legend-dot skills-dot"></i><span>Skills match</span><b id="skillScore">—</b></div><div><i class="legend-dot location-dot"></i><span>Location fit</span><b id="locationScore">—</b></div><div><i class="legend-dot experience-dot"></i><span>Experience fit</span><b id="experienceScore">—</b></div></div></div>
+                <p class="microcopy">Scores are estimates, not hiring probabilities.</p>
+              </section>
+              <section class="panel side-panel">
+                <div class="panel-title"><h2><span class="title-symbol cyan">✳</span> Your skills</h2><button class="small-link" id="editSkillsButton">Edit</button></div>
+                <div class="side-skills" id="sideSkills"><span class="empty-chip">Add skills to get started</span></div>
+                <div class="side-panel-foot">Skills are compared with each role’s listed requirements.</div>
+              </section>
+              <section class="panel side-panel missing-panel">
+                <div class="panel-title"><h2><span class="title-symbol violet">♧</span> Skills to explore</h2><span class="tiny-tag">SUGGESTED</span></div>
+                <p class="side-description">Common next skills for roles in your results.</p>
+                <div class="side-skills" id="missingSkills"><span class="empty-chip">Your suggestions appear after matching</span></div>
+                <button class="learning-callout" data-view="learning"><span class="callout-icon">↗</span><span>Turn skill gaps into a learning plan.<small>Explore a practical next step</small></span><b>→</b></button>
+              </section>
+              <section class="panel side-panel insights-panel">
+                <div class="panel-title"><h2><span class="title-symbol cyan">⌁</span> Career insights</h2></div>
+                <div class="insight-row"><div class="insight-icon">⌘</div><div><small>Popular role in this demo</small><strong>Full Stack Developer</strong><p>Combines frontend and backend skills</p></div></div>
+                <div class="insight-row"><div class="insight-icon blue">⌖</div><div><small>Location flexibility</small><strong>Remote roles included</strong><p>Remote options can match any city</p></div></div>
+                <div class="insight-row"><div class="insight-icon gold">＄</div><div><small>Salary information</small><strong>Indicative ranges only</strong><p>Verify pay and openings with employers</p></div></div>
+                <div class="insight-foot"><span>✦</span> Small steps today. Better options tomorrow.</div>
+              </section>
+              <section class="method-card"><span class="method-icon">ⓘ</span><div><strong>How matching works</strong><p>65% skills · 20% location · 10% experience · 5% work mode</p><button id="methodButton" class="text-button">View methodology ↗</button></div></section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page-view alternate-view" id="view-jobs" hidden>
+          <div class="alternate-heading"><span class="eyebrow">DISCOVER OPPORTUNITIES</span><h1>Find your <span class="gradient-text">next role.</span></h1><p>Search the curated demo dataset or run a personalized match from Home.</p></div>
+          <div class="panel browse-panel"><div class="browse-search"><span>⌕</span><input id="browseSearch" placeholder="Search title, company or skill"/><button class="primary-button" id="browseButton">Search roles</button></div><div id="browseResults" class="job-list"></div></div>
+        </section>
+
+        <section class="page-view alternate-view" id="view-profile" hidden>
+          <div class="alternate-heading"><span class="eyebrow">YOUR CAREER SNAPSHOT</span><h1>Your <span class="gradient-text">profile.</span></h1><p>A lightweight local profile for this student project.</p></div>
+          <div class="panel profile-card"><div class="profile-avatar" id="profileAvatar">ST</div><div><h2 id="profileDisplayName">Your name</h2><p id="profileHeadline">Student / early-career candidate</p><div class="profile-stats"><span><b id="profileSkillCount">0</b> skills added</span><span><b id="profileSavedCount">0</b> jobs saved</span></div></div><button class="secondary-button" id="profileEditButton">Edit skills</button></div>
+          <form class="panel student-profile-form" id="studentProfileForm">
+            <div class="panel-title"><h2>Student details</h2><span class="tiny-tag">YOUR PROFILE</span></div>
+            <p class="profile-help">Add your academic and career details to create a student profile. This demo saves them in this browser only.</p>
+            <div class="student-form-grid">
+              <label>Full name<input id="studentName" name="name" maxlength="80" placeholder="e.g. Aditi Sharma" autocomplete="name" /></label>
+              <label>Email address<input id="studentEmail" name="email" type="email" maxlength="120" placeholder="you@example.com" autocomplete="email" /></label>
+              <label>College / university<input id="studentCollege" name="college" maxlength="120" placeholder="Your college name" /></label>
+              <label>Degree / course<input id="studentDegree" name="degree" maxlength="100" placeholder="e.g. B.Tech Computer Science" /></label>
+              <label>Current year<select id="studentYear" name="year"><option value="">Select year</option><option>1st year</option><option>2nd year</option><option>3rd year</option><option>4th year</option><option>Final year</option><option>Graduate</option><option>Postgraduate</option></select></label>
+              <label>Preferred job location<input id="studentLocation" name="location" maxlength="80" placeholder="e.g. Delhi / Remote" /></label>
+              <label>LinkedIn profile<input id="studentLinkedIn" name="linkedin" type="url" maxlength="250" placeholder="https://linkedin.com/in/yourname" /></label>
+              <label>Portfolio / GitHub<input id="studentPortfolio" name="portfolio" type="url" maxlength="250" placeholder="https://github.com/yourname" /></label>
+              <label class="student-bio-field">About me<textarea id="studentBio" name="bio" rows="3" maxlength="500" placeholder="Write a short introduction about your interests, projects and career goals."></textarea></label>
+            </div>
+            <div class="student-form-actions"><span class="profile-help">Only fill in what you are comfortable sharing.</span><button class="primary-button" type="submit">Save student profile ↗</button></div>
+          </form>
+          <div class="panel profile-skills"><div class="panel-title"><h2>Your skill inventory</h2><span class="tiny-tag">EDITABLE</span></div><p>Keep this list accurate. Add only skills you can discuss or demonstrate.</p><div class="skill-editor"><input id="profileSkillInput" placeholder="Add a skill…"/><button class="secondary-button" id="profileAddSkill">Add skill +</button></div><div class="skill-chips" id="profileSkillChips"></div></div>
+        </section>
+
+        <section class="page-view alternate-view" id="view-saved" hidden>
+          <div class="alternate-heading"><span class="eyebrow">YOUR SHORTLIST</span><h1>Saved <span class="gradient-text">jobs.</span></h1><p>Keep interesting roles together while you prepare.</p></div>
+          <div class="panel browse-panel"><div id="savedResults" class="job-list"></div><div id="savedEmpty" class="empty-state"><div>♡</div><h2>No saved jobs yet</h2><p>Use the bookmark on a recommendation to add a role here.</p><button class="primary-button" data-view="jobs">Explore jobs</button></div></div>
+        </section>
+
+        <section class="page-view alternate-view" id="view-learning" hidden>
+          <div class="alternate-heading"><span class="eyebrow">YOUR NEXT STEP</span><h1>Build a <span class="gradient-text">learning path.</span></h1><p>Choose a role and turn its skill gaps into manageable learning goals.</p></div>
+          <div class="learning-grid"><div class="panel learning-controls"><label for="learningRole">Target role</label><select id="learningRole"></select><div id="learningSummary" class="learning-summary"></div></div><div class="panel learning-plan"><div class="panel-title"><h2>Suggested roadmap</h2><span class="tiny-tag">STARTER PLAN</span></div><div id="learningSteps"></div><p class="disclaimer">Suggestions are generic starting points. Choose reputable learning resources and verify each role’s actual requirements.</p></div></div>
+        </section>
+      </div>
+      <footer class="app-footer"><span>© 2026 JobPilot AI</span><span>Student project · Curated sample data · No live vacancies</span><button id="footerAbout">About this demo</button></footer>
+    </main>
+  </div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <dialog id="jobDialog" class="job-dialog"><button class="dialog-close" id="dialogClose" aria-label="Close details">×</button><div id="dialogContent"></div></dialog>
+  <dialog id="infoDialog" class="info-dialog"><button class="dialog-close" id="infoClose" aria-label="Close">×</button><div id="infoContent"></div></dialog>
+  <script src="/app.js" defer></script>
+</body>
+</html>
